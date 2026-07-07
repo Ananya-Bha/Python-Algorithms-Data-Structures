@@ -1,16 +1,59 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 4e74d58d7e727eaa5b92935fc473d1965f52cd35
+>>>>>>> c04f0a2f017a75ae7f593dc73ce3b1d781bf5223
 disableInstallBeforeRun = true
 
 entrypoint = "main.py"
 modules = ["python-3.10:v18-20230807-322e88b"]
 
+<<<<<<< HEAD
 hidden = [".pythonlibs"]
 
 [nix]
 channel = "stable-23_05"
+=======
+[nix]
+channel = "stable-23_05"
+<<<<<<< HEAD
+=======
+=======
+entrypoint = "main.py"
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+>>>>>>> a04abc2647db2d72a7cfd2e3cb4f9aac13c4cb3f
+>>>>>>> 4e74d58d7e727eaa5b92935fc473d1965f52cd35
+>>>>>>> c04f0a2f017a75ae7f593dc73ce3b1d781bf5223
 
 [unitTest]
 language = "python3"
 
+<<<<<<< HEAD
 [[ports]]
 localPort = 5900
 externalPort = 80
+=======
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix"]
+
+[deployment]
+run = ["python3", "main.py"]
+deploymentTarget = "cloudrun"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+[agent]
+expertMode = true
+>>>>>>> fbac42fd60464ab6ef1e9fbe385b2beeacb07f88
+>>>>>>> a04abc2647db2d72a7cfd2e3cb4f9aac13c4cb3f
+>>>>>>> 4e74d58d7e727eaa5b92935fc473d1965f52cd35
+>>>>>>> c04f0a2f017a75ae7f593dc73ce3b1d781bf5223

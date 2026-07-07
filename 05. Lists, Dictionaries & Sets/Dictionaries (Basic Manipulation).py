@@ -48,19 +48,14 @@ A flat shape with straight sides. Think of it like a drawing made by connecting 
 2. vertex (vertices)
 The corners or points where the sides of a polygon meet. If you draw a shape, the sharp corners where the lines end are the vertices.
 """
-# [🧑‍💻 YOUR DICTIONARY CODE HERE]
+my_dictionary = {}
+'''
+"polygon":f"A flat shape with {bold}{underline}straight sides{reset}. Think of it like a drawing made by connecting dots with straight lines.","vertex":f"The corners or points {bold}{underline}where the sides of a polygon meet{reset}. If you draw a shape, the sharp corners where the lines end are the vertices.","side":"idk"
+'''
 
-# 🚀 BONUS! Make the most important part of each definition bold.
-# You'll find escape codes at the top of the file.
-
-# check the data type of your dictionary and print it
-# [🧑‍💻 YOUR CODE HERE]
-
-# print the whole dictionary, just to see what it looks like
-# [🧑‍💻 YOUR CODE HERE]
-
-# lookup a single entry from the dictionary using .get()
-# [🧑‍💻 YOUR CODE HERE]
+# print(type(my_dictionary))
+# print(my_dictionary)
+# print(my_dictionary.get("polygon",))
 
 # -------------------------------------------------
 # CHALLENGE 2 - UPDATING THE DICTIONARY
@@ -69,10 +64,12 @@ The corners or points where the sides of a polygon meet. If you draw a shape, th
 # add one new entry to the dictionary using square brackets
 """
 3. side
-The straight edges that make up the polygon. If you think of your polygon as a fence, the sides are the pieces of wood between each post (vertex).
+{underline}.
 """
 # [🧑‍💻 YOUR CODE HERE]
-
+'''
+my_dictionary["side"]="The thing Deleted but it talked about sides"
+'''
 
 # create a NEW dictionary for the names of six polygons
 # 🎨 put the number of sides in BOLD and in DIFFERENT COLOURS
@@ -84,10 +81,14 @@ The straight edges that make up the polygon. If you think of your polygon as a f
 5. heptagon: A polygon with seven sides.
 6. octagon: A polygon with eight sides.
 """
-# [🧑‍💻 YOUR CODE HERE]
+polygons = {"Triangle":f"A polygon with {g} three sides.{reset}"
+,"Quadrilateral":f"A polygon with {b}four sides.{reset}","Pentagon":f"A polygon with {p}five sides.{reset}","Hexagon":f"A polygon with {y}six sides.{reset}","Heptagon":f"A polygon with{c} seven sides.{reset}","Octagon":f"A polygon with {w}{bold}eight sides.{reset}"}
+list_shape_name=list(polygons.keys())
+list_shape_meaning=list(polygons.values())
+final= dict(zip(list_shape_name,list_shape_meaning))
 
 # update your original dictionary with this new dictionary
-# [🧑‍💻 YOUR CODE HERE]
+my_dictionary.update(polygons)
 
 # -------------------------------------------------
 # CHALLENGE 3 - DICTIONARY FORMATTING
@@ -97,16 +98,16 @@ The straight edges that make up the polygon. If you think of your polygon as a f
 # keep asking the user for a word to look up until they quit
 # then output that word and its meaning to the console
 # 🚀 BONUS! Format the output nicely with text styles, white space etc.
-
-# uncomment the code below before you start
-# while True:
-#     word = input("Which word should I look up? (q to quit) ")
-#     if word == "q":
-#         break
-#     else:
-#         output = "[🧑‍💻 YOUR CODE HERE]"
-#         print(output)
-
+'''
+while True:
+    word = input("Which word should I look up? (q to quit) ")
+    word=word.lower()
+    if word == "q":
+        break
+    else:
+        output = my_dictionary.get(word)
+        print(output)
+'''
 
 # ===========================================================
 # 2️⃣ LESSON 9.4 DICTIONARIES II
@@ -117,15 +118,23 @@ The straight edges that make up the polygon. If you think of your polygon as a f
 # -------------------------------------------------
 
 # get a LIST of polygon names from the dictionary without retyping them
-# [🧑‍💻 YOUR CODE HERE]
-
+polygons= list(my_dictionary.keys())
+print(polygons)
 # iterate through the list and print each polygon on a separate line
 # uncomment the code below before you start
 # print("\nPOLYGONS")
 # # [🧑‍💻 YOUR CODE HERE]
+print("\nPOLYGONS:")
+for polygon in polygons:
+    print(polygon)
 
 # # get a LIST of definitions of each polygon from the dictionary
 # # [🧑‍💻 YOUR CODE HERE]
+definitions=list(my_dictionary.values())
+print("\nDEFINITIONS:")
+for definition in definitions:
+    print(definition)
+print("\n")
 
 # # iterate through the list and print each definition on a separate line
 # print("\nDEFINITIONS")
@@ -141,50 +150,65 @@ sides_list = [3, 4, 5, 6, 7, 8]
 
 # create dictionary with sides as keys and polygon names as values
 # [🧑‍💻 YOUR CODE HERE]
-
+my_dictionarey2={"3":"Triangle","4":"Quadrilateral","5":"Pentagon","6":"Hexagon","7":"Heptagon","8":"Octagon"}
+list1=list(my_dictionarey2.keys())
+list2=list(my_dictionarey2.values())
+new= dict(zip(list1,list2))
+print(new)
 # print it to see that it's a dictionary
 # uncomment the line below before you start
 # print("\nDICTIONARY")
 # [🧑‍💻 YOUR CODE HERE]
 
 # choose a random number of sides from the list
-num = random.choice(sides_list)
+num = random.choice(list1)
 
 # lookup and print the matching POLYGON NAME
-# [🧑‍💻 YOUR CODE HERE]
+shape= my_dictionarey2[num]
+print(num,shape)
 
 # lookup and print the matching DEFINITION for that polygon
 # [🧑‍💻 YOUR CODE HERE]
-
+definition= my_dictionary[shape]
+print(definition)
 # -------------------------------------------------
 # CHALLENGE 6 - EXTERNAL ANGLES OF POLYGONS
 # -------------------------------------------------
-
 # create an empty dictionary
-# [🧑‍💻 YOUR CODE HERE]
-
+external_angles= {}
+side= list(external_angles.keys())
+ex_angle = list(external_angles.values())
+external_angles=dict(zip(side,ex_angle))
 # calculate the internal angles for each number of sides
 for num_sides in sides_list:
     # calculate the size of the external angle
     angle = round(360 / num_sides, 1)
     # add the number of sides and angle to the dictionary
-    # [🧑‍💻 YOUR CODE HERE]
+    side.append(num_sides)
+    ex_angle.append(angle)
+    external_angles.update(zip(side,ex_angle))
 
 # print the dictionary, just to check your output
-# [🧑‍💻 YOUR CODE HERE]
+print(f"\n{c}Challenge 6:{reset}\n",external_angles)
 
 # -------------------------------------------------
 # CHALLENGE 7 - DICTIONARIES WITH THE SAME KEYS
 # -------------------------------------------------
 
 # make multiple dictionaries using the same keys
-
-# this is a list of VARIABLES, containing ANSI escape codes from the top of the script
 console_colours = [r, g, y, b, p, c]
+colours={}
+colours=dict(zip(sides_list,console_colours))
+emojis={}
+number_emojis={}
+# this is a list of VARIABLES, containing ANSI escape codes from the top of the script
+
 
 # lits of some appropriate emoji (you can customise these later)
 reaction_emojis = ["❤️", "💚", "💛", "💙", "💜", "🩵"]
 number_emojis = ["3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"]
+
+
 
 # now use zip to make dictionaries using the above lists
 # [🧑‍💻 YOUR CODE HERE]
