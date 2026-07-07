@@ -13,3 +13,9 @@ requiredFiles = [".replit", "replit.nix"]
 [deployment]
 run = ["python3", "main.py"]
 deploymentTarget = "cloudrun"
+<<<<<<< HEAD
+=======
+
+[agent]
+expertMode = true
+>>>>>>> fbac42fd60464ab6ef1e9fbe385b2beeacb07f88
