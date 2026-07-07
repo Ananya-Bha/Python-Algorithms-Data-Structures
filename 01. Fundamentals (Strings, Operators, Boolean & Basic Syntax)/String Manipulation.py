@@ -46,17 +46,24 @@ indexes = [0, 1, 2, 3, 4, 5, 6, 7]
 
 # 🧑‍💻 YOUR CODE HERE
 
+print(words[0])
+for i in indexes:
+    print(words[i])
 
+print(f"{words[2]} {words[5]} {words[3]}")
 
 # -------------------------------------------------
 # CHALLENGE 2 - INDEXES IN STRINGS
 # -------------------------------------------------
-
+#       0123456789
 code = "YUEISNTHTESMRTBHZEMWAQTJURITXSA IOUZA"
 
 # 🧑‍💻 YOUR CODE HERE
-
-
+'''
+print(code[2])
+print(code[5])
+print(code[6])
+'''
 
 # -------------------------------------------------
 # CHALLENGE 3 - DECIPHERING THE CODE
@@ -64,6 +71,8 @@ code = "YUEISNTHTESMRTBHZEMWAQTJURITXSA IOUZA"
 
 codex = [2, 5, 8, 9, 12, 31, 13, 15, 17, 31, 18, 20, 22, 25, 26, 28]
 
+for i in codex:
+    print(code[i])
 # 🧑‍💻 YOUR CODE HERE
 
 
@@ -73,38 +82,62 @@ codex = [2, 5, 8, 9, 12, 31, 13, 15, 17, 31, 18, 20, 22, 25, 26, 28]
 # -------------------------------------------------
 
 # 🧑‍💻 YOUR CODE HERE
+print(f"{code[2]}{code[5]}{code[8]}{code[9]}{code[12]}{code[31]}{code[13]}{code[15]}{code[17]}{code[31]} {code[18]}{code[20]}{code[22]}{code[25]}{code[26]}{code[28]}")
 
 # -------------------------------------------------
 # CHALLENGE 5 - MAKE IT A FUNCTION
 # -------------------------------------------------
-
+     #   0123456789
 code2 = "LTQASFKXGDOEPTHWLEPNREIDNPQINLLN TDKFJDIUZK"
 codex2 = [1, 3, 6, 11, 32, 13, 14, 17, 32, 20, 21, 23, 32, 25, 27, 29, 30]
 
+
+
 # 🧑‍💻 YOUR CODE HERE
+'''
+def decoder(text, coder):
+    message =""
+    for i in coder:
+        message +=text[i]
+    print(message)
 
-
+decoder(code2, codex2)
+'''
 
 # -------------------------------------------------
 # CHALLENGE 6 - STRING REPLACEMENT
 # -------------------------------------------------
+'''
+sentence = "I love cats.\n"
+print(sentence)
 
-# sentence = "I love cats.\n"
-# print(sentence)
+sentence = sentence.replace(".","!")
+print(sentence)
+
+sentence = sentence.replace("cats","dogs")
+print(sentence)
+
+sentence = sentence.replace("I","I really")
+print(sentence)
 
 # 🧑‍💻 YOUR CODE HERE
+'''
 
 # -------------------------------------------------
 # CHALLENGE 7 - STRING REPLACEMENT 2
 # -------------------------------------------------
-
-# sentence = "In|a|hole|in|the|ground|there|lived|a|hobbit.\n"
-# print(sentence)
+'''
+sentence = "In|a|hole|in|the|ground|there|lived|a|hobbit.\n"
+print(sentence)
 
 # 🧑‍💻 YOUR CODE HERE
-
-
-
+sentence= sentence.replace("|"," ")
+print(sentence)
+sentence= sentence.replace(" ","  ")
+print(sentence)
+sentence= sentence.replace("a","🅰️").replace("b","🅱️").replace("o","⭕")
+print(sentence)
+'''
 # -------------------------------------------------
 # CHALLENGE 8 - WORD SEARCH - PART 1
 # -------------------------------------------------
@@ -143,21 +176,24 @@ grid = """
     KCBMORPHEUSCZONAYHSQFMJZWCKMYVNM
     MNKNGPNUWKMMGNCCIJHQFWGKSCCTOEPE
 """
-
-# print(grid)
-
 # 🧑‍💻 YOUR CODE HERE
-
-
-
+"""
+grid=grid.replace("MATRIX",f"{bold}{g}MATRIX{reset}")
+print(grid)
+"""
 # -------------------------------------------------
 # CHALLENGE 9 - WORD SEARCH - PART 2
 # -------------------------------------------------
-
+'''
 words = ["pill", "matrix", "Neo", "spoon", "one", "Morpheus"]
 
-# 🧑‍💻 YOUR CODE HERE
+for word in words:
+    word= word.upper()
+    grid= grid.replace(word,f"{bold}{g}{word}{reset}")
 
+print(grid)
+# 🧑‍💻 YOUR CODE HERE
+'''
 
 
 # -------------------------------------------------
@@ -199,5 +235,16 @@ new_grid = """
     GYFXXYFIHUQWPMTJRZAILAFYIMFUTWIY
 """
 new_words = ["rockethour", "coding", "fun", "python"]
+
+def change(grids, words, colour=p):
+    current_grid=grids
+    for word in words:
+        word= word.upper()
+        current_grid= current_grid.replace(word,f"{bold}{colour}{word}{reset}")
+    return current_grid
+
+
+
+print(change(new_grid, new_words)) 
 
 # 🧑‍💻 YOUR CODE HERE
