@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 disableInstallBeforeRun = true
 
 entrypoint = "main.py"
@@ -5,6 +6,13 @@ modules = ["python-3.10:v18-20230807-322e88b"]
 
 [nix]
 channel = "stable-23_05"
+=======
+entrypoint = "main.py"
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+>>>>>>> a04abc2647db2d72a7cfd2e3cb4f9aac13c4cb3f
 
 [unitTest]
 language = "python3"
@@ -15,3 +23,12 @@ requiredFiles = [".replit", "replit.nix"]
 [deployment]
 run = ["python3", "main.py"]
 deploymentTarget = "cloudrun"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+[agent]
+expertMode = true
+>>>>>>> fbac42fd60464ab6ef1e9fbe385b2beeacb07f88
+>>>>>>> a04abc2647db2d72a7cfd2e3cb4f9aac13c4cb3f
