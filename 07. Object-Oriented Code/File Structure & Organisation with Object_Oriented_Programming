@@ -1,0 +1,255 @@
+#---------------------------------------------------------#
+
+# Person class (abstract class)
+# Private attributes - Name and age
+# Methods - getters and setters for above, role (polymorphism based on the class)
+# Two inheritance - Teacher and Student
+# Headteacher inherits Teacher
+# Teacher attributes - subject (getters and setters)
+# Headteacher - office (getters and setters)
+# Student - grade (getters and setters)
+
+
+#Subfolder: People---------------------------------------------------------------------------------------------------------#    
+
+#Person.py-----------------------------------------------------#
+
+class Person():
+    def __init__(self,name,age):
+        self.__name=name
+        self.__age=age
+        
+    def get_name(self):
+        return self.__name
+        
+    def get_age(self):
+        return self.__age
+        
+    def change_age(self,new_age):
+        if new_age<0:
+            print("Age cannot be below 0!")
+            return False
+        self.__age += new_age
+        return True
+        
+    def change_name(self,new_name):
+        if len(new_name)==0:
+            print("No name has been entered!")
+            return False
+        self.__name=new_name
+        return True
+        
+        
+    def display_role(self):
+        print("I am a person")
+
+#---------------------------------------------------------------#
+
+#Teacher.py-----------------------------------------------------#
+
+#Importing the class Person from person.py
+from person import Person
+
+class Teacher(Person):
+    def __init__(self, name, age, subject):
+        self.__subject=subject
+        super().__init__(name,age)
+        
+    def get_subject(self):
+        return self.__subject
+        
+    def change_subject(self, new_subject):
+        if len(new_subject)==0:
+            print("No subject has been entered!")
+            return False
+        self.__subject=new_subject
+        return True
+    
+    #Display the role for Teacher
+    def display_role(self):
+        print("I am a Teacher.")
+
+        
+class Head_Teacher(Teacher):
+    def __init__(self, name,age,subject,office):
+        self.__office=office
+        super().__init__(name,age,subject)
+        
+    def get_office(self):
+        return self.__office
+        
+    def set_office(self,new_office):
+        if len(new_office)==0:
+            print("No office has been chosen!")
+            return False
+        self.__office=new_office
+        return True
+        
+    #Display the role for Headteacher    
+    def display_role(self):
+        print("I am the Headteacher.")
+
+#---------------------------------------------------------------#   
+    
+#Student.py-----------------------------------------------------#
+
+class Student(Person):
+    def __init__(self, name, age, grade):
+        self.__grade=grade
+        self.__grades = ["F", "D", "C", "B", "A", "A+"]
+        super().__init__(name,age)
+        
+    # Output the grade in the letter format using the index of grades    
+    def get_grade(self):
+        return self.__grades[self.__grade]
+        
+    def increase_grade(self, grade_change):
+        new_grade += grade_change
+        if not(0 <= new_grade < len(self.__grades)):#Check if the new grade is in the appropriate range
+            print("Grade not found!")
+            return False
+        self.__grade = new_grade
+        return True
+      
+    #Display the role for student  
+    def display_role(self):
+        print("I am a Student.")
+ 
+#---------------------------------------------------------------#    
+
+#__init__.py----------------------------------------------------#
+
+from .Student import *
+from .Person import * 
+from .Teacher import *
+
+#---------------------------------------------------------------#
+
+#People
+#|
+#|--person.py
+#|
+#|--Student.py
+#|
+#|--Teacher.py
+
+#------------------------------------------------------------------------------------------------------------#    
+        
+#School.py------------------------------------------------------#        
+        
+# Name, Level (Elementary, Middle, High), Teachers, Students, Headteacher
+# Initalise teachers, students to empty list, set head teacher
+# Getters and setters
+
+class School():
+    def __init__(self,name,level,headteacher):
+        #Initalise teachers and students to blank
+        self.__students = []
+        self.__teachers= []
+        self.__levels = ["Elementary", "Middle", "High"]
+        self.__name=name
+        self.__level=level
+        self.__headteacher=headteacher
+        
+    def get_name(self):
+        return self.__name
+        
+    def get_level(self):
+        return self.__level
+        
+    def get_headteacher(self):
+        return self.__headteacher
+        
+    def set_name(self,new_name):
+        if len(new_name)==0:
+            print("No name has been entered!")
+            return False
+        self.__name=new_name
+        return True
+        
+    def set_level(self,new_level):
+        if new_level in self.__levels:
+            self.level=new_level
+            return True
+        print("Level not found!")
+        return False
+        
+    #TODO: add methods to allow for inputting students and teachers
+    #AddStudent - appending it to the internal students list
+    def add_student(self,new_student):
+        self.__students.append(new_student)
+        
+    #Same for teacher
+    def add_teacher(self,new_teacher):
+        self.__teachers.append(new_teacher)
+
+#---------------------------------------------------------------#   
+
+
+
+#main.py--------------------------------------------------------#
+
+from people.Student import Student
+from people.Teacher import Teacher, Head_Teacher
+from school import School
+        
+school1 = School("London High School", "High", Head_Teacher("Mr Jones", 45, "English", "9A"))
+
+
+#---------------------------------------------------------------#
+
+#Weather-----------------------------------------------------------------------------------------------------------#   
+
+#Weather
+#|
+#|--temperature.py #Converting temperature into celsius/fahrenheit and vice veras
+#|
+#|--interpret.py #Explaining the weather (Describe the temperature as hot, cold, warm)
+#|
+#|--analysis.py #Finding mean, median, average and mode of a list of temperatures
+
+#temperature.py--------------------------------------------------------#
+
+#Convert temperature to celsius from fahrenheit
+def celsius_to_fahrenheit(celsius):
+    fahrenheit=(celsius*(9/5))+32
+    return fahrenheit
+
+#Convert temperature to fahrenheit to celsius
+def fahrenheit_to_celsius(fahrenheit):
+    celsius= (fahrenheit-32)*(5/9)
+    return celsius
+    
+#---------------------------------------------------------------------#
+
+#interpret.py---------------------------------------------------------#
+
+
+#Function to describe the given temperature (given in Celsius)
+def describe_temp(magnitude,unit):
+    if unit.lower()=="c":
+        if magnitude <=0:
+            return "Very Cold"
+        elif 0<magnitude<=20:
+            return "warm"
+        elif magnitude>20:
+            return "hot"
+        
+    if unit.lower()=="f":
+        if magnitude <=59:
+            return "Very Cold"
+        elif 59<magnitude<=80:
+            return "warm"
+        elif magnitude>80:
+            return "hot"
+
+#Function that returns a boolean of a weather warning (>45C, then return a weather warning)
+def check_for_warning(magnitude,unit):
+    if unit.lower()=="c":
+        if magnitude>=45:
+            return "Weather Warning! Very Hot!"
+        
+        
+    if unit.lower()=="f":
+        if magnitude>=100:
+            return "Weather Warning! Very Hot"
