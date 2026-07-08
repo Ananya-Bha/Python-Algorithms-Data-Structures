@@ -1,0 +1,98 @@
+#Example 1
+def fifty_thirty_twenty(n):
+    split={"Needs":0.50*n, "Wants":0.30*n,"Savings":0.20*n}
+    return split
+
+income= int(input("How much do you earn?"))
+print(fifty_thirty_twenty(income))
+
+#---------------------------------------------------------#
+
+letters_values = { "a": 44, "b": 45, "c": 46 }
+#d = { "pot": 1, "tot": 2, "not": 3 }
+
+def check_key(key,d):
+    return key in d
+    
+    
+    
+check_num= input("Enter a Key you would like to check:")
+print(check_key(check_num,letters_values))
+
+#---------------------------------------------------------#
+stuff={}
+def is_empty(stuff):
+    return not bool(stuff)
+
+#---------------------------------------------------------#
+
+obj_one = {
+  "name": "Benny",
+  "phone": "3325558745",
+  "email": "benny@edabit.com"
+}
+
+obj_two = {
+  "name": "Jason",
+  "phone": "9853759720",
+  "email": "jason@edabit.com"
+}
+
+
+def is_same(obj_one,obj_two):
+    return obj_one==obj_two
+
+
+#---------------------------------------------------------#
+
+dct = {"cost_price": 32.67, "sell_price": 45.00, "inventory":100}
+
+//dct["sell_price"] -> 45.0
+
+def profit(dct):
+    sell_p=dct["sell_price"]
+    cost_p=dct["cost_price"]
+    items=dct["inventory"]
+    profit=((sell_p-cost_p)*items)
+    return profit
+    
+ print(profit(dct))   
+
+#---------------------------------------------------------#
+
+p1 = {"name": "Samuel", "age": 24}
+p2 = {"name": "Joel", "age": 36}
+p3 = {"name": "Lily", "age": 24}
+
+#Person B is older/younger/same age than person A
+
+def compare_age(personA,personB):
+    nameA= personA["name"]
+    nameB= personB["name"]
+    ageA= personA["age"]
+    ageB= personB["age"]
+    if ageB>ageA:
+        return(nameB+" is older than "+nameA)
+    elif ageA>ageB:
+        return(nameA+" is older than "+nameB)
+    else:
+        return(nameA+" is the same age as "+nameB)
+    
+    
+print(compare_age(p1,p2))
+
+#Class version
+
+class Person():
+    def __init__(self, name, age): #Constructor
+        self.name = name
+        self.age = age
+    def compare_age(self, personB):
+        if personB.age > self.age:#Person B's age is bigger
+            return f"{personB.name} is older than me"
+        elif personB.age < self.age:#Our age is bigger
+            return f"{personB.name} is younger than me"
+        else:#We have the same age
+            return f"{personB.name} is the same age as me"
+
+
