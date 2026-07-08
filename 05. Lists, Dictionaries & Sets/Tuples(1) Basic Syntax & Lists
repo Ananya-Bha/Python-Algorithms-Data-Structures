@@ -1,0 +1,390 @@
+"""Exercise 1: Perform Basic List Operations
+
+Given:
+
+my_list = [10, 20, 30, 40, 50]
+
+Perform following operations on given list
+
+    1 - Access Elements: Print the third element.
+    2-  List Length: Print the number of elements in the list
+    3 - Check if Empty: Write a code to check is list empty.
+
+"""
+my_list = [10, 20, 30, 40, 50]
+#1ACCES ELEMENTS
+print(my_list[2])
+#2LIST LENGTH
+length=len(my_list)
+print("This is the length of your list :",length)
+#print(f"This is the length of your list : {length}")
+#3EMPTY CHECK
+if length==0:
+    print("Your list is empty!")
+else:
+    print("not empty")
+    
+"""Exercise 2: Tuple Repetition
+
+Repeat a below tuple three times.
+
+Given:"""
+
+original_tuple = ('a', 'b')
+
+"""Expected Output:
+
+('a', 'b', 'a', 'b', 'a', 'b)"""
+
+print(original_tuple*3)
+
+"""Exercise 3: Slicing Tuples
+
+Slice below tuple to get elements from the 4th to the 7th position.
+
+Given:"""
+
+numbers = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+"""Expected Output:
+
+(4, 5, 6, 7)"""
+
+print(numbers[2:7])
+
+#Slicing
+#List[the index where you start:the index where you end + 1(the first element not included):the step at which you go to the next element(default it's 1)]
+
+
+"""Exercise 4: Reverse the tuple
+
+Given:"""
+
+tuple1 = (10, 20, 30, 40, 50)
+
+"""Expected output:
+
+(50, 40, 30, 20, 10)"""
+
+print(tuple1[::-1])
+
+"""Exercise 9: Create a copy of a list
+
+Create a copy of a list [10, 20, 30] and modify the copy. Print both the original and the copied list to demonstrate they are independent."""
+
+li = [10, 20, 30]
+
+li3 = li[:]
+
+li2=li.copy() #1st copy
+li2=li2[::-1] #2nd copy, slicing creates a copy
+print(f"{li}\n{li2}")
+
+
+#------------------------------------------------------------------------------------
+
+"""A sentence is a list of words that are separated by a single space with no leading or trailing spaces. Each of the words consists of only uppercase and lowercase English letters (no punctuation).
+
+    For example, "Hello World", "HELLO", and "hello world hello world" are all sentences.
+
+You are given a sentence s​​​​​​ and an integer k​​​​​​. You want to truncate s​​​​​​ such that it contains only the first k​​​​​​ words. Return s​​​​​​ after truncating it.
+
+ 
+
+Example 1:
+
+Input: s = "Hello how are you Contestant", k = 4
+Output: "Hello how are you"
+Explanation:
+The words in s are ["Hello", "how" "are", "you", "Contestant"].
+The first 4 words are ["Hello", "how", "are", "you"].
+Hence, you should return "Hello how are you".
+
+Example 2:
+
+Input: s = "What is the solution to this problem", k = 4
+Output: "What is the solution"
+Explanation:
+The words in s are ["What", "is" "the", "solution", "to", "this", "problem"].
+The first 4 words are ["What", "is", "the", "solution"].
+Hence, you should return "What is the solution".
+
+Example 3:
+
+Input: s = "chopper is not a tanuki", k = 5
+Output: "chopper is not a tanuki"
+
+ 
+
+Constraints:
+
+    1 <= s.length <= 500
+    k is in the range [1, the number of words in s].
+    s consist of only lowercase and uppercase English letters and spaces.
+    The words in s are separated by a single space.
+    There are no leading or trailing spaces.
+
+"""
+
+def truncate(s, k):
+    words=s.split()
+    new_list=[]
+    #check contraints
+    if len(s)>500 or len(s)<1:
+        return "Invalid number of characters!"
+    word_count=len(s.split())
+    if k in range(1, word_count+1):
+        return "Invalid value for number of words to keep!"
+    
+    #new_list = words[:k]
+    for i in range(k):
+        new_list.append(i)
+        
+    return " ".join(new_list)
+    
+        
+        
+    
+
+sentence=input("Enter a sentence:")
+k = int(input("Enter a value for how many words you would like to keep:"))
+print(truncate(sentence, k))
+
+
+"""You are given an integer array order of length n and an integer array friends.
+
+    order contains every integer from 1 to n exactly once, representing the IDs of the participants of a race in their finishing order.
+    friends contains the IDs of your friends in the race sorted in strictly increasing order. Each ID in friends is guaranteed to appear in the order array.
+
+Return an array containing your friends' IDs in their finishing order.
+ 
+ 
+Example 1:
+
+Input: order = [3,1,2,5,4], friends = [1,3,4] 
+
+Output: [3,1,4]
+
+Explanation:
+
+The finishing order is [3, 1, 2, 5, 4]. Therefore, the finishing order of your friends is [3, 1, 4].
+
+Example 2:
+
+Input: order = [1,4,5,3,2], friends = [2,5]
+
+Output: [5,2]
+
+Explanation:
+
+The finishing order is [1, 4, 5, 3, 2]. Therefore, the finishing order of your friends is [5, 2].
+
+
+Constraints:
+
+    1 <= n == order.length <= 100
+    order contains every integer from 1 to n exactly once
+    1 <= friends.length <= min(8, n)
+    1 <= friends[i] <= n
+    friends is strictly increasing
+
+"""
+
+def finishing_order(order,friends):
+    list2=[]
+    for o in order:
+        if o in friends:
+            list2.append(o)
+    return list2
+
+
+order=[3,1,2,5,4]
+friends=[1,3,4]
+print(finishin_order(order,friends))
+
+"""You are given an integer array nums. Transform nums by performing the following operations in the exact order specified:
+
+    Replace each even number with 0.
+    Replace each odd numbers with 1.
+    Sort the modified array in non-decreasing order.
+
+Return the resulting array after performing these operations.
+
+ 
+
+Example 1:
+
+Input: nums = [4,3,2,1]
+
+Output: [0,0,1,1]
+
+Explanation:
+
+    Replace the even numbers (4 and 2) with 0 and the odd numbers (3 and 1) with 1. Now, nums = [0, 1, 0, 1].
+    After sorting nums in non-descending order, nums = [0, 0, 1, 1].
+
+Example 2:
+
+Input: nums = [1,5,1,4,2]
+
+Output: [0,0,1,1,1]
+
+Explanation:
+
+    Replace the even numbers (4 and 2) with 0 and the odd numbers (1, 5 and 1) with 1. Now, nums = [1, 1, 1, 0, 0].
+    After sorting nums in non-descending order, nums = [0, 0, 1, 1, 1].
+
+"""
+
+
+
+
+
+
+
+
+"""You are given an m x n integer grid accounts where accounts[i][j] is the amount of money the ith customer has in the jth bank. Return the wealth that the richest customer has.
+
+A customer's wealth is the amount of money they have in all their bank accounts. The richest customer is the customer that has the maximum wealth.
+
+ 
+
+Example 1:
+
+Input: accounts = [[1,2,3],[3,2,1]]
+Output: 6
+Explanation:
+1st customer has wealth = 1 + 2 + 3 = 6
+2nd customer has wealth = 3 + 2 + 1 = 6
+Both customers are considered the richest with a wealth of 6 each, so return 6.
+
+Example 2:
+
+Input: accounts = [[1,5],[7,3],[3,5]]
+Output: 10
+Explanation: 
+1st customer has wealth = 6
+2nd customer has wealth = 10 
+3rd customer has wealth = 8
+The 2nd customer is the richest with a wealth of 10.
+
+Example 3:
+
+Input: accounts = [[2,8,7],[7,1,3],[1,9,5]]
+Output: 17
+
+ 
+
+Constraints:
+
+    m == accounts.length
+    n == accounts[i].length
+    1 <= m, n <= 50
+    1 <= accounts[i][j] <= 100
+
+ 
+"""
+
+def check_wealth():
+    
+
+#-------------------------------------------------------------------#
+
+"""
+You are keeping the scores for a baseball game with strange rules. At the beginning of the game, you start with an empty record.
+
+You are given a list of strings operations, where operations[i] is the ith operation you must apply to the record and is one of the following:
+
+    An integer x.
+        Record a new score of x.
+    '+'.
+        Record a new score that is the sum of the previous two scores.
+    'D'.
+        Record a new score that is the double of the previous score.
+    'C'.
+        Invalidate the previous score, removing it from the record.
+
+Return the sum of all the scores on the record after applying all the operations.
+
+The test cases are generated such that the answer and all intermediate calculations fit in a 32-bit integer and that all operations are valid.
+
+ 
+
+Example 1:
+
+Input: ops = ["5","2","C","D","+"]
+Output: 30
+Explanation:
+"5" - Add 5 to the record, record is now [5].
+"2" - Add 2 to the record, record is now [5, 2].
+"C" - Invalidate and remove the previous score, record is now [5].
+"D" - Add 2 * 5 = 10 to the record, record is now [5, 10].
+"+" - Add 5 + 10 = 15 to the record, record is now [5, 10, 15].
+The total sum is 5 + 10 + 15 = 30.
+
+Example 2:
+
+Input: ops = ["5","-2","4","C","D","9","+","+"]
+Output: 27
+Explanation:
+"5" - Add 5 to the record, record is now [5].
+"-2" - Add -2 to the record, record is now [5, -2].
+"4" - Add 4 to the record, record is now [5, -2, 4].
+"C" - Invalidate and remove the previous score, record is now [5, -2].
+"D" - Add 2 * -2 = -4 to the record, record is now [5, -2, -4].
+"9" - Add 9 to the record, record is now [5, -2, -4, 9].
+"+" - Add -4 + 9 = 5 to the record, record is now [5, -2, -4, 9, 5].
+"+" - Add 9 + 5 = 14 to the record, record is now [5, -2, -4, 9, 5, 14].
+The total sum is 5 + -2 + -4 + 9 + 5 + 14 = 27.
+
+Example 3:
+
+Input: ops = ["1","C"]
+Output: 0
+Explanation:
+"1" - Add 1 to the record, record is now [1].
+"C" - Invalidate and remove the previous score, record is now [].
+Since the record is empty, the total sum is 0.
+
+ 
+
+Constraints:
+
+    1 <= operations.length <= 1000
+    operations[i] is "C", "D", "+", or a string representing an integer in the range [-3 * 104, 3 * 104].
+    For operation "+", there will always be at least two previous scores on the record.
+    For operations "C" and "D", there will always be at least one previous score on the record.
+"""
+
+#.remove(the value to remove)
+#.pop(the index to remove)
+#del list[index]
+#clear() => removes the entire list
+# sum(list) => The addition of everything in the list
+
+ops = ["5","2","C","D","+"]
+def scores(ops):
+    record=[]
+    total=0
+    for o in ops:
+        value=o
+        if value.isnumeric() :
+            record.append(int(value))
+        elif value == "+":
+            add1= int(record[-2])
+            add2=int(record[-1])
+            new_add =add1+add2
+            record.append(new_add)
+        elif value =="D":
+            no_to_double = int(record[-1])
+            double = no_to_double*2
+            record.append(double)
+        elif value =="C":
+            record.pop(-1)
+            
+    total=sum(record)
+    print(record)
+    print(f"The sum of your list is {total}")
+        
+        
+    
