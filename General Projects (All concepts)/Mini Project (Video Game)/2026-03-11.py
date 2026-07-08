@@ -1,0 +1,244 @@
+import random
+player = {
+  "name": "",
+  "health": 100,
+  "max_health": 200,
+  "max_armour": 200, 
+  "armour": 0,
+  "gold": 50,
+  "damage": 5,
+  "potions": [],
+  "weapons": ["Fist"]
+}
+
+#Dictionary for the prices of items
+prices = {
+  "Sword": 100,
+  "Knife": 40, 
+  "Stick": 15,
+  "Club": 60,
+  "health": 15,
+  "armour": 10
+}
+
+#Dictionary for damage output of weapons
+weapons = {
+  "Sword": 20,
+  "Knife": 10, 
+  "Stick": 7,
+  "Club": 15,
+  "Fist": 5,
+}
+
+enemies = [
+  {"name": "Orc", "health": 50, "damage": 7, "gold": 15},
+  {"name": "Zombie", "health": 40, "damage": 10, "gold": 25},
+  {"name": "Alien", "health": 60, "damage": 15, "gold": 40},
+  {"name": "Skeleton", "health": 20, "damage": 7, "gold": 10}
+]
+
+final_boss = {"name": "Final Boss", "health": 100, "damage": 25, "gold": 100}
+
+potions = ["health", "armour"]
+battle_counter=0
+
+#Handles potion drinking
+def potion_drinking():
+  if len(player["potions"])==0:
+    print("-- No potions available --")
+    return
+  print("These are the potions that you have available:")
+  print(player["potions"])
+  #User can input a potion or "q" to move on (loop if they don't enter these options)
+  potion_choice=input("Which potion would you like to use? (Or enter 'q' to quit)\n> ")
+  while (potion_choice not in player["potions"]) and (potion_choice != "q"):
+    print("Invalid Potion")
+    potion_choice=input("Which potion would you like to use?\n> ")
+  #If user entered q, do nothing, else if the user entered a potion, remove the potion and apply its effects
+  #Health potion adds 25 health (up to max health), armor potion adds 25 armor
+  if potion_choice =="q":
+    return
+  player["potions"].remove(potion_choice)
+  if potion_choice == "health":
+    player["health"]+=25
+    if player["health"]>player["max_health"]:
+      player["health"]=player["max_health"]
+  elif potion_choice =="armour":
+    player["armour"]+=25
+    if player["armour"]>player["max_armour"]:
+      player["armour"]=player["max_armour"]
+  print(f"Your {potion_choice} has been updated.\n You now have {player[potion_choice]} {potion_choice}!")
+
+#Handles attack enemy
+# - Choose a weapon
+# - Subtract the health of the enemy based off the weapon chosen
+def attack_enemy(enemy):
+  damage_output = player["damage"]
+  if len(player["weapons"])==0:
+    print("-- No weapons available --")
+  else:  
+    print("These are the weapons that you have available:")
+    print(player["weapons"])
+    #User can input a weapon or "f" for fists (loop if not either of these choices
+    while True:
+      weapon_choice=input("Which weapon would you like to use?\n> ")
+      if (weapon_choice in player["weapons"]) or (weapon_choice == "q"):
+        break
+      print("Invalid choice")
+    if weapon_choice == "q":
+      print("You have skipped this turn!")
+      return
+    if weapon_choice in weapons:
+      damage_output=weapons[weapon_choice]
+      enemy["health"]-=damage_output
+    print(f"The damage done to {enemy["name"]} is {damage_output}!")
+    print(f"Enemy Stats:\n")
+    for key, value in enemy.items():
+      print(f"{key}: {value}")
+
+
+# Fighting enemy:
+# - Randomly select one of the enemies
+# - Have a loop where the player than drink a potion/fight/run away
+# - Enemy attacks the player
+def fight_enemy(enemy):
+  global battle_counter
+  battle_counter += 1
+  print(f" --- Battle {battle_counter}--- \n")
+  print(f"The enemy that you will fight is - {enemy["name"]} - ")
+  while (player["health"]>0) and (enemy["health"]>0) :
+    #Enemy attacks the player first
+    player["health"]-=enemy["damage"]
+    print(f"The {enemy["name"]} has attacked you by {enemy["damage"]}!\n Your new health is {player["health"]}")
+    if player["health"]<=0:
+      print("You have no health left!")
+      break
+    print(f" -- Options Available -- \n")
+    print("1. Drink Potion")
+    print("2. Fight")
+    print("3. Run away")
+    while True:
+      choice= input("What would you like to do: ")
+      if choice in ["1", "2", "3"]:
+        break
+      else:
+        print("Invalid choice...")
+    if choice=="1":
+      potion_drinking()
+    elif choice=="2":
+      attack_enemy(enemy)
+    elif choice=="3":
+      return
+  #If player's health is 0, exit the game
+  if player["health"] <= 0:
+    print("You have lost!\n Player health = 0")
+    quit()
+  #Else if enemies's health less than 0, take their gold
+  elif enemy["health"]<=0:
+    gold_taken= enemy["gold"]
+    player["gold"]+=gold_taken
+    enemy["gold"]=0
+    print(f"Enemy had been defeated!\n You have taken {gold_taken} gold from them!")
+
+
+# ["Health", "Health", "Armor", "Armor", "Health"]
+
+#Print out the stats of the player in a readable format
+def view_stats():
+  print("\n------------------------\n")
+  print(f"-- Player Statistics --\n")
+  print(f"1.Name: {player["name"]}")
+  print(f"2.Health: {player["health"]}")
+  print(f"3.Max Health: {player["max_health"]}")
+  print(f"4.Armour: {player["armour"]}")
+  print(f"5.Gold: {player["gold"]}")
+  if len(player["potions"])==0:
+    print(f"6.Potions : --- No potions available --- ")
+  else:
+    print(f"6.Potions: {player["potions"]}")
+  if len(player["weapons"])==0:
+    print(f"6.Weapons : --- No weapons available --- ")
+  else:
+    print(f"6.Weapons: {player["weapons"]}")
+  print("\n--------------------------\n")
+
+def handle_purchase(player_choice, type):
+  if player["gold"]>prices[player_choice]:
+    player[type].append(player_choice)
+    player["gold"]-=prices[player_choice]
+    print(f"You have successfully bought {player_choice}.\nGold Left: {player["gold"]}")
+  else:
+    print("Not enough gold available...")
+
+def shop():
+  #Display all the weapons and potions for sale (and their prices) (press q for quit)
+  print(f"Shop Prices:\n")
+  for item, price in prices.items():
+    print(f"{item}: {price}")
+  player_choice=input("\nEnter the item you would like to buy?\nEnter 'q' to Quit\nChoice: ")
+  while player_choice!="q":
+    #If they buy anything, add it to the appropriate array and subtract the gold
+  #Add to potions if
+    if player_choice in potions:
+      handle_purchase(player_choice,"potions")
+  #Add to weapons if
+    elif player_choice in weapons:
+      handle_purchase(player_choice,"weapons")
+    else:
+      print("Invalid Choice! Try again...")
+    player_choice=input("\nEnter the item you would like to buy?\nEnter 'q' to Quit\nChoice: ")
+  
+def boss_fight():
+  print("Sorry, boss didn't come into work today! Come back later!")
+  print("...")
+  print("They are here!")
+  fight_enemy(final_boss)
+  if final_boss["health"] <= 0:
+    print("You won!!!!")
+    quit()
+  else:
+    final_boss["health"] = 100
+
+#-----------------
+#  Main Game Loop
+#-----------------
+# Ask the user to enter their name
+# The user to continuously input a number to select an option
+# If the number matches the option, start the relevant procedure
+# If the number is the quit option, end the game
+
+
+def main():
+  name = input("Enter your name: ")
+  # Assign the name to the dictionary of player
+  player["name"]=name
+  while True:
+    print("""=====Main Menu=====
+          
+1 - Drink Potion
+2 - Fight Enemy
+3 - View Stats
+4 - Go to Shop
+5 - Fight the Boss
+6 - Quit
+           """)
+    choice= input("> ")
+    if choice =="1":
+      potion_drinking()
+    elif choice == "2":
+      fight_enemy(random.choice(enemies).copy())
+    elif choice == "3":
+      view_stats()
+    elif choice =="4":
+      shop()
+    elif choice == "5":
+      boss_fight()
+    elif choice == "6":
+      break
+    else:
+      print("Invalid input!")
+
+main()
+
+
+
