@@ -1,0 +1,151 @@
+#Challenge 1
+##Creating, adding, removing and discarding from a set
+fruits= {'apple','orange','mango','banana'}
+print(fruits)
+fruits.add('grape')
+print(fruits)
+fruits.remove('banana')
+print(fruits)
+fruits.discard('mango')
+print(fruits)
+
+
+##--------------------------##
+set1 = {10, 20, 30, 40, 50}
+set2 = {30, 40, 50, 60, 70}
+
+
+#Challenge 2
+#Set union (A OR B, A ∪ B, A+B, A v B)
+
+Union = set1.union(set2)
+#Union= set1 | set2 -> Python notation for union
+print(Union)
+
+##--------------------------##
+
+#Challenge 3
+#Set intersection (A AND B, A ∩ B, A.B)
+
+Intersect = set1.intersection(set2)
+#set1 & set2 -> Python notation for union
+print(Intersect)
+
+##--------------------------##
+
+#Challenge 4
+#Set difference (A AND (NOT B), A ∩ B', A.B, A n ¬B)
+
+difference= set1-set2
+#difference = set1.difference(set2)
+print(difference)
+
+
+##--------------------------##
+
+#Challenge 5
+#Symmetric difference (A XOR B, A ⊕ B)
+
+union= set1 | set2
+intersect = set1 & set2
+
+symmetric_dif=union-intersect
+#symmetric_dif=set1 ^set2 OR .symmetric_difference() -> Python notation 
+print(symmetric_dif)
+
+##--------------------------##
+
+#Challenge 6
+# Add to set from list
+
+sample_set = {"Yellow", "Orange", "Black"}
+sample_list = ["Blue", "Green", "Red"]
+
+for i in sample_list:
+    sample_set.add(i)
+print(sample_set)
+
+#Alternate
+sample_set.update(sample_list)
+
+##--------------------------##
+
+##Challenge 7
+#Difference update
+#Update a set with values from another set that aren't in the unique set
+
+set1 = {10, 20, 30}
+set2 = {20, 40, 50}
+
+#Output for set1: {10, 30}
+
+common= set1.intersection(set2)
+set1.remove(common)
+print(set1)
+
+set1.difference_update(set2)
+
+##--------------------------##
+
+##Challenge 8
+#Remove multiple items from a set simultaneously
+
+set1 = {10, 20, 30, 40, 50}
+remove_list = [10,20,30]
+
+#Output: {40,50}
+
+#
+set(remove_list)
+set1.difference_update(remove_list)
+
+#remove_set = set(remove_list)
+#set1.difference_update(remove_set)
+
+#set1.difference_update(set(remove_list))
+
+##--------------------------##
+
+##Challenge 9
+#Check if set 2 is a subset of set 1
+
+set1 = {10, 20, 30, 40}
+set2 = {10, 20}
+
+#set2 - set1 -> 
+#set1 ^ set2 -> {30,40}
+
+if set2-set1 == set():
+    return True
+else:
+    return False
+    
+set1.issubset(set2)
+
+
+##--------------------------##
+
+##Challenge 10
+#Is superset
+set1 = {10, 20, 30, 40}
+set2 = {10, 20}
+
+set1.issuperset(set2)
+if set1^set2 == set() or set1-set2!= set():
+    return True
+else:
+    return False
+
+##--------------------------##
+
+#Check if string only contains unique values
+#Sets only contain unique elements
+#Removes duplicate elements when converting into a set
+
+def check_unique(s):
+    return len(s) == len(set(s))
+
+
+
+
+
