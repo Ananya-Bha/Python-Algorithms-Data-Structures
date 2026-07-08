@@ -1,0 +1,150 @@
+def say_hello_bye(name,num):
+    if num==1:
+        return ("Hello, "+name)
+    elif num==0:
+        return ("Bye!")
+    else:
+        return("Invalid Input")
+
+
+
+name=input("Enter you Name:")
+num= int(input("Enter a number (0 or1):"))
+
+say_hello_bye(name,num)
+--------------------------------------------
+
+def darts_scoring(x, y):
+    R = int(((x**2)+(y**2))**0.5)
+    if R> 10:
+        return(0)
+    elif 10>=R>5:
+        return(1)
+    elif 5>=R>1:
+        return(5)
+    elif R<=1:
+        return(10)
+    else:
+        return ("Invalid Input")
+        
+    
+    
+
+x = int(input("Enter X coordinate:"))
+y = int(input("Enter y coordinate:"))
+darts_scoring()
+
+
+#x^2 x**2
+#x**0.5
+#10 <= R < 15
+#26 -> "26"
+# 
+
+
+def count_palindromes(x,y):
+    num=0
+    for i in range(x,y):
+        i = str(i)
+        check= i[::-1]
+        if check==i:
+            num+=1
+            
+    return num
+
+
+count_palindromes()
+
+def num_to_dashes(num):
+    dash= "-"
+    final_output= dash*num
+    print(final_output)
+    #return final_output    
+
+
+
+num= int(input("Enter a number between 1 and 60:" ))
+print(num_to_dashes(num))
+
+#--------------------------------
+"""Given an integer x, return true if x is a
+
+, and false otherwise.
+
+ 
+
+Example 1:
+
+Input: x = 121
+Output: true
+Explanation: 121 reads as 121 from left to right and from right to left.
+
+Example 2:
+
+Input: x = -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+
+Example 3:
+
+Input: x = 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+
+Strong typing:
+There's no interaction between the two
+(You can still interact ints and floats)
+
+Weak typing:
+The language guesses what interaction should take place
+"1" + 1 = 2
+"""
+
+def check_palindrome(num):#num is an integer
+    snum = str(num)
+    if snum[::-1] == snum:
+        return True
+        
+    else:
+        return False
+        
+check_palindrome(x)
+
+
+#-------------------------
+
+"""Create a number guessing game.
+First, think of a number between 1 and 100.
+Then, allow the player to guess a number between 1 and 100.
+If they are too high, tell them they are too high. If they are too low, tell them they are too low.
+Once they get it right, tell them they've won and end the game."""
+
+import random as r
+number= r.randint(1,101)
+chances_left=10
+print("Enter a number between 1 & 100.\n(You only have 10 guesses to figure out what the number is! Good Luck:)\n")
+while True:
+    try:
+        user_guess= int(input("Your Guess:"))
+        if user_guess>100 or user_guess<1:
+            chances_left-=1
+            print("Out of range! Try Again!")
+        elif user_guess==number:
+            print("Correct!")
+            break
+        elif user_guess>number:
+            chances_left-=1
+            print("Too High!")
+        elif user_guess<number:
+            chances_left-=1
+            print("Too Low!")
+    except ValueError:
+        chances_left -= 1
+        print("What in the world is that! Please give an integer!")
+    
+    if chances_left != 0:
+        print(f"You have {chances_left} chances left to guess the number!")    
+    else:
+        print(f"You have run out of chances! The number was: {number}!")
+        break
+    
