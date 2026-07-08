@@ -1,0 +1,405 @@
+#Object-oriented programming
+# Glossary:
+# Classes - blueprint for objects: collection of attributes and methods, grouping variables and functions together
+# Object - Instantiation of a class (version of a class that exist)
+# Instantiation - when an object is created based off a class
+# Attributes - Name for variables and similar inside a class
+# Methods - name for all the functions/similar in a class
+# Inheritance - taking on extra attributes of your parent classes
+# Parent class/superclass - the class above you in the inheritance ladder
+# Sub class/child class - the class below that inherits
+# Encapsulation - hiding variables from the end user via getters and setters
+# Public variables - Variables that can be accessed directly from outside of the class
+# Private variables - Variables that cannot be accessed outside of the class directly
+# Getters - Methods that return attributes in a class
+# Setters - Methods that display arributes in a class
+# Overriding - Using the same method name to do something different
+# Polymorphism - Using the same method name to do different actions (when share the parent class)
+# Composition - when classes have classes inside itself, rather than inheriting from it.
+
+# Rule of thumb: Composition over inheritance unless one thing IS-A different thing
+
+# One file main.py
+
+#Basic class
+class Animal():
+    #Constructor method - the method that runs when instantiation happens
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    #A method
+    def eat(self):
+        print(f"{self.name} is eating!")
+        
+#Inherited class
+class Cat(Animal):
+    def __init__(self, name, age, claws):
+        self.claws = claws
+        #Calling the superclass to do its constructor
+        super().__init__(name, age)
+    #Function not from the base class
+    def catch_mouse(self):
+        print(f"{self.name} has caught a mouse!")
+        
+#Class that modifies attributes
+class Counter():
+    def __init__(self):
+        self.count = 0
+    def increase_by(self, num):
+        self.count += num
+    def decrease_by(self, num):
+        self.count -= num
+    def show(self):
+        print(self.count)
+        
+#Bank account = balance attribute, account name
+#Three methods = withdraw and deposit, display details
+name=input("Enter account name:")
+balance= input("Enter balance:")
+class Bank():
+    def __init__(self,balance,name):
+        self.name = name
+        self.balance = balance
+    def withdraw(self,num):
+        self.balance-=num
+    def deposit(self,num):
+        self.balance+=num
+    def show(self):
+        print(f"Account Name:{self.balance}\nBalance:{self.balance}")
+        
+class Vehicle():
+    def __init__(self, speed, colour):
+        self.speed = speed
+        self.colour = colour
+    def set_speed(self, speed):
+        self.speed = speed
+
+#Inherit from Vehicle to make Car with a new attribute of Brand
+#New method for making a vroom sound
+
+class Car(Vehicle):
+    def __intit__(self,speed,colour,brand):
+        self.brand=brand
+        super().__init__(speed,colour)
+    def sound(self):
+        print("Vroom Vroom!")
+#Inherits from Vehicle to make a Airplane
+#New attributes: max height
+#New methods: liftoff, prints that it has taken off
+class Airplane(Vehicle):
+    def __init__(self,speed,colour,max_height):
+        self.max_height=max_height
+        super().__init__(speed,colour)
+    def liftoff(self):
+        print("The plane has taken off!")
+        
+#-----------------------------------------------#
+#Create a class for Book 
+#Book should have attributes: title and author
+#Book should have methods: display
+#Create a class for textbook
+#Inherits from book
+#New attribute: subject
+        
+#Base class/parent class
+class Book:
+    def __init__(self,title,author):
+        self.title = title
+        self.author= author
+
+        
+    def display(self):
+        print(f"Book title{self.title}\nBook Author:{self.author}")
+        
+#Subclass/ child class
+class Textbook(Book):
+    def __init__(self,title,author,subject):
+        self.subject=subject
+        super().__init__(title,author)
+    
+Book1 = Book("1984", "George Orwell")#Objct
+        
+#----------------------------------------------#
+
+#Basic class
+class Animal():
+    #Constructor method - the method that runs when instantiation happens
+    def __init__(self, name, age):
+        #Private variable
+        self.__name = name
+        self.__age = age
+        self.__adult = False
+        self.__adult_age = 10
+    #A method
+    def eat(self):
+        print(f"{self.name} is eating!")
+    #Getters
+    def get_name(self):
+        return self.__name
+    def get_age(self):
+        return self.__age
+    def is_retired(self):
+        return self.__retired
+    #Setters
+    def set_name(self, new_name):
+        if new_name == "": # User may not know that the name can't be blank
+            print("Name is not supposed to be blank!")
+            return False
+        self.__name = new_name
+        return True
+    def change_age(self, age_change):
+        if age_change < 0:
+            print("Can't decrease age!")
+            return False
+        self.__age += age_change
+        if age > self.__adult_age:
+            self.__retired = True # Retired is influenced by a different variable
+        return True
+    def make_sound(self):
+        print("Noise")
+        
+#Inherited class
+class Cat(Animal):
+    def __init__(self, name, age, claws):
+        self.claws = claws
+        #Calling the superclass to do its constructor
+        super().__init__(name, age)
+        self.__adult_age = 1
+    #Function not from the base class
+    def catch_mouse(self):
+        print(f"{self.name} has caught a mouse!")
+    
+    #Overriding
+    def make_sound(self):
+        print("Meow")
+        
+class Dog(Animal):
+    def __init__(self, name, age):
+        #Calling the superclass to do its constructor
+        super().__init__(name, age)
+        self.__adult_age = 2
+    #Function not from the base class
+    def catch_ball(self):
+        print(f"{self.name} has caught the ball!")
+    
+    #Overriding
+    def make_sound(self):
+        print("Woof!")
+        
+def performance(animal):
+    for i in range(5):
+        #Polymorphism
+        animal.make_sound()
+        
+#----------------------------------------------#
+#Create an RPG character
+#Private variables: First Name, Last Name, Class, Health
+#Getters and setters 
+#Health shouldn't be below zero
+#Class should only be either "Wizard", "Knight", "Thief"
+#Get Name should only be one function (First + Last)
+
+class Character():
+    def __init__(self,First_Name, Last_Name, Class, Health):
+        self.__first_name=First_Name
+        self.__last_name=Last_Name
+        self.__class=Class
+        self.__health=Health
+        
+    def get_FullName(self):
+        return self.__first_name+self.__last_name
+        
+    def set_Health(self,new_health):
+        if new_health<0:
+            print("Health shouldn't be below 0!")
+            return False
+        self.__health=new_health
+        return True
+    
+    def change_Health(self, health_change):
+        self.__health+=health_change
+        #Set it to 0 if below 0, 100 if it is above 100
+        if self.__health <0:
+            self.__health=0
+        if self.__health>100:
+            self.__health=100
+        
+    def set_Class(self,new_class):
+        classes=["Wizard","Knight","Thief"]
+        if new_class not in classes:
+            print("Class tyep not accepted!")
+            return False
+        self.__class=new_class
+        return True
+        
+#----------------------------------------------#
+#Shape class
+#Methods: Get Perimeter, Get Area (pass)
+#Inherited class Square
+#Implement methods
+#Inherited class Circle
+#Implement methods
+#Function that takes a list of shapes and returns their area and perimeter (loop)
+        
+class Shape():
+    def get_perimeter(self):
+        pass
+    def get_area(self):
+        pass
+    
+class Square(Shape):
+    pass
+        
+        
+#---------------------------------------------------------#
+
+# Person class (abstract class)
+# Private attributes - Name and age
+# Methods - getters and setters for above, role (polymorphism based on the class)
+# Two inheritance - Teacher and Student
+# Headteacher inherits Teacher
+# Teacher attributes - subject (getters and setters)
+# Headteacher - office (getters and setters)
+# Student - grade (getters and setters)
+
+
+class Person():
+    def __init__(self,name,age):
+        self.__name=name
+        self.__age=age
+        
+    def get_name(self):
+        return self.__name
+        
+    def get_age(self):
+        return self.__age
+        
+    def change_age(self,new_age):
+        if new_age<0:
+            print("Age cannot be below 0!")
+            return False
+        self.__age += new_age
+        return True
+        
+    def change_name(self,new_name):
+        if len(new_name)==0:
+            print("No name has been entered!")
+            return False
+        self.__name=new_name
+        return True
+        
+        
+    def display_role(self):
+        print("I am a person")
+
+
+class Teacher(Person):
+    def __init__(self, name, age, subject):
+        self.__subject=subject
+        super().__init__(name,age)
+        
+    def get_subject(self):
+        return self.__subject
+        
+    def change_subject(self, new_subject):
+        if len(new_subject)==0:
+            print("No subject has been entered!")
+            return False
+        self.__subject=new_subject
+        return True
+    
+    #Display the role for Teacher
+    def display_role(self):
+        print("I am a Teacher.")
+    
+    
+class Student(Person):
+    def __init__(self, name, age, grade):
+        self.__grade=grade
+        self.__grades = ["F", "D", "C", "B", "A", "A+"]
+        super().__init__(name,age)
+        
+    # Output the grade in the letter format using the index of grades    
+    def get_grade(self):
+        return self.__grades[self.__grade]
+        
+    def increase_grade(self, grade_change):
+        new_grade += grade_change
+        if not(0 <= new_grade < len(self.__grades)):#Check if the new grade is in the appropriate range
+            print("Grade not found!")
+            return False
+        self.__grade = new_grade
+        return True
+      
+    #Display the role for student  
+    def display_role(self):
+        print("I am a Student.")
+        
+class Head_Teacher(Teacher):
+    def __init__(self, name,age,subject,office):
+        self.__office=office
+        super().__init__(name,age,subject)
+        
+    def get_office(self):
+        return self.__office
+        
+    def set_office(self,new_office):
+        if len(new_office)==0:
+            print("No office has been chosen!")
+            return False
+        self.__office=new_office
+        return True
+        
+    #Display the role for Headteacher    
+    def display_role(self):
+        print("I am the Headteacher.")
+        
+# Name, Level (Elementary, Middle, High), Teachers, Students, Headteacher
+# Initalise teachers, students to empty list, set head teacher
+# Getters and setters
+
+class School():
+    def __init__(self,name,level,headteacher):
+        #Initalise teachers and students to blank
+        self.__students = []
+        self.__teachers= []
+        self.__levels = ["Elementary", "Middle", "High"]
+        self.__name=name
+        self.__level=level
+        self.__headteacher=headteacher
+        
+    def get_name(self):
+        return self.__name
+        
+    def get_level(self):
+        return self.__level
+        
+    def get_headteacher(self):
+        return self.__headteacher
+        
+    def set_name(self,new_name):
+        if len(new_name)==0:
+            print("No name has been entered!")
+            return False
+        self.__name=new_name
+        return True
+        
+    def set_level(self,new_level):
+        if new_level in self.__levels:
+            self.level=new_level
+            return True
+        print("Level not found!")
+        return False
+        
+    #TODO: add methods to allow for inputting students and teachers
+    #AddStudent - appending it to the internal students list
+    def add_student(self,new_student):
+        self.__students.append(new_student)
+        
+    #Same for teacher
+    def add_teacher(self,new_teacher):
+        self.__teachers.append(new_teacher)
+    
+    
+        
+school1 = School("London High School", "High", Head_Teacher("Mr Jones", 45, "English", "9A"))
